@@ -1,0 +1,26 @@
+{
+  "objects": [
+    {"path": "db/a/base.parquet", "digest": "sha256:aa", "tenant": "t1", "database_id": "db1", "size_bytes": 100},
+    {"path": "db/a/delta-2.parquet", "digest": "sha256:bb", "tenant": "t1", "database_id": "db1", "size_bytes": 50},
+    {"path": "db/b/copy.parquet", "digest": "sha256:bb", "tenant": "t1", "database_id": "db2", "size_bytes": 50},
+    {"path": "db/other/stray.parquet", "digest": "sha256:cc", "tenant": "t2", "database_id": "db3", "size_bytes": 12}
+  ],
+  "manifests": [
+    {
+      "snapshot_id": "snap-1",
+      "parent_snapshot_id": null,
+      "database_id": "db1",
+      "tenant": "t1",
+      "creation_order": 1,
+      "referenced_paths": ["db/a/base.parquet"]
+    },
+    {
+      "snapshot_id": "snap-2",
+      "parent_snapshot_id": "snap-1",
+      "database_id": "db1",
+      "tenant": "t1",
+      "creation_order": 2,
+      "referenced_paths": ["db/a/base.parquet", "db/a/delta-2.parquet", "db/missing/gone.parquet"]
+    }
+  ]
+}
